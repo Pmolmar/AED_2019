@@ -93,6 +93,23 @@ public:
           }
         }
 
+//Modificacion
+  T mod(void)
+  {
+    T aux;
+    for (int i = 1; i <= get_m(); i++)
+    {
+      for (int j = 1; j <= get_n(); j++)
+      {
+        if(i%2==0)
+          aux=aux+at(i,j);
+        else
+          aux=aux-at(i,j);
+      }
+    }
+    return aux;
+  }
+
 private:
 
         int pos(int i, int j) const

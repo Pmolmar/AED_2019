@@ -30,6 +30,7 @@ public:
   { assert(d != 0), den_ = d; }
 
   void add(const rational_t& a, const rational_t& b);
+  void sub(const rational_t& a, const rational_t& b);
   void multiply(const rational_t&a, const rational_t& b);
 
   void write(ostream& os = cout) const;
@@ -58,6 +59,19 @@ void rational_t::add(const rational_t& a, const rational_t& b)
 	}
 }
 
+void rational_t::sub(const rational_t& a, const rational_t& b)
+{
+	if (a.get_den() == b.get_den()){
+		den_ = a.get_den();
+		num_ = a.get_num() - b.get_num();
+	}
+	else{
+		den_ = a.get_den() * b.get_den();
+		num_ = b.get_num() * a.get_den() - a.get_num() * b.get_den();
+	}
+}
+
+
 void rational_t::multiply(const rational_t&a, const rational_t& b)
 {
 	num_ = a.get_num() * b.get_num();
@@ -72,11 +86,13 @@ void rational_t::write(ostream& os) const
     {
       os<<get_num()/get_den();
       if((get_num()%get_den())>0)
-        os<<"+"<<(get_num()-(get_num()/get_den())*get_den())/mcd<<"/"<<get_den()/mcd;
+      {
+        os<<"+"<<(get_num()%get_den())/mcd<<"/"<<get_den()/mcd;
+      }
     }
     else
       os<<get_num()/mcd<<"/"<<get_den()/mcd;
-    os<<'\t';
+    os<<setw('\t');
 }
 
 ostream& operator<<(ostream& os, const rational_t& a)
@@ -89,6 +105,14 @@ rational_t operator+(const rational_t& a, const rational_t& b)
 {
     rational_t c;
     c.add(a,b);
+
+    return c;
+}
+
+rational_t operator-(const rational_t& a, const rational_t& b)
+{
+    rational_t c;
+    c.sub(a,b);
 
     return c;
 }

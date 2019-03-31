@@ -4,6 +4,14 @@
 
 using namespace std;
 
+/*
+Modificacion:
+crear funcion que devuelva un rational_t llamada mod que se encarga de sumar
+todos los elementos que tiene, pero cuando el numero de filas sea par sumamos
+si es impar restamos
+*/
+
+
 int main(void)
 {
     rational_matrix_t A(3, 2);
@@ -34,9 +42,10 @@ int main(void)
     rational_matrix_t C;
 
     C = A * B;
-    
+
     cout << "=" << endl << endl;
     cout << C << endl;
+    cout << C.mod()<<endl;
 
     return 0;
 }

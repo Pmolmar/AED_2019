@@ -46,8 +46,15 @@ public:
 	}
 
 //fase III
+	//metodo extra para tamaño original
+	int get_tam(void)const
+	{
+		return sz_;
+	}
+
 	double scal_prod(const vector_t<double>& b) const
 	{
+		assert(sz_==b.size());
 		double producto=0.0;
 		node_pair_t *aux=v_.head();
 
@@ -63,7 +70,8 @@ public:
 		return producto;
 	}
 
-	//fase IV
+//fase IV
+  //metodo extra para elegir el nodo de v_
 	node_pair_t* get_node(int pos)const
 	{
 		node_pair_t* node=v_.head();
@@ -78,6 +86,7 @@ public:
 
 	double scal_prod(const sparse_vector_t& b) const
 	{
+		assert(sz_==b.get_tam());
 		double producto=0.0;
 		node_pair_t *aux=v_.head();
 		node_pair_t *auxb=b.get_node(0);

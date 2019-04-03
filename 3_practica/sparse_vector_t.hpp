@@ -105,6 +105,21 @@ public:
 		return producto;
 	}
 
+	//Modificacion
+	void insert_pos(node_pair_t* nodo, int pos)
+	{
+		node_pair_t* aux= v_.head();
+		node_pair_t *prev;
+
+		while(aux!=NULL)
+		{
+			if(aux->get_data().get_inx()<pos)
+				prev=aux;
+			aux=aux->get_next();
+		}
+		v_.insert_after(prev,nodo);
+	}
+
 private:
 	bool is_not_zero(double val, double eps){ return fabs(val) > eps;}
 

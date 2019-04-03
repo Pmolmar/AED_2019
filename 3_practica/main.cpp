@@ -8,6 +8,11 @@ using namespace AED;
 #define V_SZ 10000
 #define EPS  1E-3
 
+/*
+Modificacion:
+Crear funcion void insert_pos(sll_node_t& nodo, int pos)
+*/
+
 int main(void)
 {
 	vector_t<double> v1(V_SZ);
@@ -49,4 +54,19 @@ int main(void)
 
 	cout << prod1 << endl;
 	cout << prod2 << endl;
+
+	double val=0.0;
+	int pos=0;
+	cout<<"Introduzca valor: ";
+	cin>>val;
+	cout<<"Introduzca posicion: ";
+	cin>>pos;
+	spair_t par(pos,val);
+	node_pair_t *nodo;
+	nodo = new node_pair_t;
+	nodo->set_data(par);
+
+	sv1.insert_pos(nodo,pos);
+
+	sv1.write(cout);
 }

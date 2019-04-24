@@ -11,13 +11,13 @@ using namespace std;
 template <class T>
 class dll_t
 {
-  private:
+private:
     dll_node_t<T> *head_;
     dll_node_t<T> *tail_;
 
     int sz_;
 
-  public:
+public:
     dll_t(void);
     virtual ~dll_t(void);
 
@@ -37,6 +37,8 @@ class dll_t
     int get_size(void);
 
     ostream &write(ostream &os) const;
+
+    dll_node_t<T> *head(void) const { return head_; };
 };
 
 template <class T>

@@ -12,6 +12,7 @@ using namespace std;
 int main(void)
 {
 	matrix_t<rational_t> A(MAX_DIM, MAX_DIM);
+	matrix_t<rational_t> B(MAX_DIM, MAX_DIM);
 
 	for (int i = 1; i <= MAX_DIM; i++)
 		A(i, i) = rational_t(1, i + 1);
@@ -22,23 +23,31 @@ int main(void)
 	A.write(cout);
 	cout << endl;
 
-	cout<<"COL_CONF = 0, ROW_CONF > 0: ";
+	cout << "COL_CONF = 0, ROW_CONF > 0: ";
 	bool fila;
-	cin>>fila;
-	
+	cin >> fila;
+
 	if (!fila)
 	{
-		cout<<"COL_CONF ->";
+		cout << "COL_CONF:" << endl;
 		sparse_matrix_t SA(A, 1E-2, COL_CONF);
 		SA.write(cout);
 		cout << endl;
+
+		SA.mult(A, B);
+		cout << "La multiplicacion es:" << endl;
+		B.write(cout);
 	}
 	else
 	{
-		cout<<"ROW_CONF ->";
+		cout << "ROW_CONF:" << endl;
 		sparse_matrix_t SA(A, 1E-2, ROW_CONF);
 		SA.write(cout);
 		cout << endl;
+
+		SA.mult(A, B);
+		cout << "La multiplicacion es:" << endl;
+		B.write(cout);
 	}
 
 	return 0;

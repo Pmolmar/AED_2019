@@ -35,39 +35,60 @@ public:
     if (conf_ != COL_CONF)
     {
       matriz_.resize(n_);
-      for (int i = 1; i <= m_; ++i)
-        for (int j = 1; j <= n_; ++j)
+      for (int i = m_; i > 0; --i)
+        for (int j = n_; j > 0; --j)
           if (!mat(i, j).zero(eps_))
           {
             par.set(i, mat(i, j));
             aux = new dll_node_t<pair_t<rational_t>>;
             aux->set_data(par);
-            matriz_[j-1].insert_head(aux);
+            matriz_[j - 1].insert_head(aux);
           }
     }
     else if (conf_ != ROW_CONF)
     {
       matriz_.resize(m_);
-      for (int i = 1; i <= m_; ++i)
-        for (int j = 1; j <= n_; j++)
-          if (!mat(i,j).zero(eps_))
+      for (int i = m_; i > 0; --i)
+        for (int j = n_; j > 0; --j)
+          if (!mat(i, j).zero(eps_))
           {
             par.set(j, mat(i, j));
             aux = new dll_node_t<pair_t<rational_t>>;
             aux->set_data(par);
-            matriz_[i-1].insert_head(aux);
+            matriz_[i - 1].insert_head(aux);
           }
     }
   };
   ~sparse_matrix_t(){};
 
-  ostream& write(ostream &os)
+  ostream &write(ostream &os)
   {
     for (int i = 0; i < matriz_.size(); ++i)
     {
+      os << i << ": ";
       matriz_[i].write(os);
+      os << endl;
     }
     return os;
+  }
+
+  void mult(const matrix_t<rational_t> &mat, matrix_t<rational_t> &res)
+  {
+    assert(n_ == mat.get_m());
+
+    res.resize(m_, mat.get_n());
+    for (int i = 1; i <= matriz_.size(); i++)
+    {
+      for (int j = 1; j < mat.get_n(); j++)
+      {
+        dll_node_t<pair_t<rational_t>> *aux = matriz_[i-1].head();
+        while (aux != NULL)
+        {
+          res(i, j) = res(i, j) + aux->get_data().get_val() * mat(aux->get_data().get_inx(), j);
+          aux = aux->get_next();
+        }
+      }
+    }
   }
 };
 

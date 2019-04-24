@@ -9,6 +9,10 @@
 
 using namespace std;
 
+/*
+contar elementos no nulos de la ultima columna de la matriz.
+*/
+
 int main(void)
 {
 	matrix_t<rational_t> A(MAX_DIM, MAX_DIM);
@@ -27,12 +31,17 @@ int main(void)
 	bool fila;
 	cin >> fila;
 
+	int x;
 	if (!fila)
 	{
 		cout << "COL_CONF:" << endl;
 		sparse_matrix_t SA(A, 1E-2, COL_CONF);
 		SA.write(cout);
 		cout << endl;
+
+		cout << "Introduzca col entre 1-"<<MAX_DIM-1<<": "<< endl;
+		cin>>x;
+		cout<<"Hay "<<SA.no_null(x)<<" elementos no nulos."<<endl<<endl;
 
 		SA.mult(A, B);
 		cout << "La multiplicacion es:" << endl;
@@ -44,6 +53,10 @@ int main(void)
 		sparse_matrix_t SA(A, 1E-2, ROW_CONF);
 		SA.write(cout);
 		cout << endl;
+
+		cout << "Introduzca col entre 1-"<<MAX_DIM-1<<": "<< endl;
+		cin>>x;
+		cout<<"Hay "<<SA.no_null(x)<<" elementos no nulos."<<endl<<endl;
 
 		SA.mult(A, B);
 		cout << "La multiplicacion es:" << endl;

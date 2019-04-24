@@ -90,6 +90,11 @@ public:
       }
     }
   }
+
+  int no_null(int col)
+  {
+    return matriz_[col].get_size();
+  }
 };
 
 ostream &operator<<(ostream &os, const pair_t<rational_t> &a)

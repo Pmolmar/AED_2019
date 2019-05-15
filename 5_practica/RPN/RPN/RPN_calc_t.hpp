@@ -5,60 +5,115 @@
 #include <cassert>
 #include <string>
 #include <iostream>
-
+#include <cmath>
 
 using namespace std;
 
-namespace AED {
+namespace AED
+{
 
-	template <class T>
-	class RPN_calc_t{
-	private:
-		T stack_;
+template <class T>
+class RPN_calc_t
+{
+private:
+	T stack_;
 
-	public:
-		RPN_calc_t() {}
+public:
+	RPN_calc_t() {}
 
-		~RPN_calc_t() {}
-	
-		const int compute(istream& is)
+	~RPN_calc_t() {}
+
+	const int compute(istream &is)
+	{
+
+		int operando;
+		char operador;
+
+		while (!is.eof())
 		{
 
-			int operando;
-			char operador;
+			is >> ws;
+			int c = is.peek();
 
-			while(!is.eof()){
+			if (!is.eof())
+			{
 
-				is >> ws;
-				int c = is.peek();
-
-				if (!is.eof()) {
-
-					if (isdigit(c)){
-						is >> operando;
-						...
-					}
-					else {
-						is >> operador;
-						...
-					}
+				if (isdigit(c))
+				{
+					is >> operando;
+					stack_.push(operando);
+				}
+				else
+				{
+					is >> operador;
+					operate(operador);
 				}
 			}
-
-			const int result = stack_.top();
-			stack_.pop();
-
-			return result;
 		}
 
-		private: 
+		const int result = stack_.top();
+		stack_.pop();
 
-			void operate(char operador){
-				
-				...
-			}
+		return result;
+	}
 
-       };
+private:
+	void operate(char operador)
+	{
+		int a, b;
 
-}
+		a = stack_.top();
+		stack_.pop();
 
+		if (operador == '+' | operador == '-' | operador == '*' | operador == '/' | operador == '^')
+		{
+			b = stack_.top();
+			stack_.pop();
+		}
+
+		switch (operador)
+		{
+		case '+':
+			stack_.push(b + a);
+			break;
+
+		case '-':
+			stack_.push(b - a);
+			break;
+
+		case '*':
+			stack_.push(b * a);
+			break;
+
+		case '/':
+			stack_.push(b / a);
+			break;
+
+		case '^':
+			stack_.push(pow(b, a));
+			break;
+
+		case 'r':
+			stack_.push(sqrt(a));
+			break;
+
+		case 'l':
+			stack_.push(log2(a));
+			break;
+
+		case 'c':
+			stack_.push(pow(a, 2));
+			break;
+
+		//modificacion
+		case 'n':
+			stack_.push(a * (-1));
+			break;
+
+		default:
+			break;
+		}
+	}
+};
+
+} // namespace AED

@@ -15,6 +15,12 @@ typedef stack_v_t<int> stack_vector;
 typedef stack_l_t<int> stack_lista;  
 typedef stack<int>     stack_stl;
 
+
+/*
+modificacion:
+	crear un nuevo operador 'n' que multiplica por -1 el valor
+*/
+
 int main(void)
 {
 	{

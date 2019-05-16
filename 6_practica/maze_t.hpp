@@ -14,7 +14,7 @@
 
 #define WALL_CHR  "█"
 #define PASS_CHR  " "
-#define PATH_CHR  "·"
+#define PATH_CHR  "▒"
 #define START_CHR "A"
 #define END_CHR   "B"
 

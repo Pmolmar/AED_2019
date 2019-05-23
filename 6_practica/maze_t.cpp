@@ -88,7 +88,7 @@ bool maze_t::solve(int i, int j)
   // el desplazamiento (isOK), y en ese caso, intentar resolver el laberinto
   // llamando recursivamente a 'solve'. Si la llamada devuelve 'true',
   // propagarla retornando también 'true'
-  for (int k = 0; k < 4; ++k)
+  for (int k = N; k <= SE; ++k)
   {
     if (isOK(i + i_d[k], j + j_d[k]))
     {

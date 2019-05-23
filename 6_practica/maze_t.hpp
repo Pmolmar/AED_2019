@@ -22,12 +22,12 @@ typedef matrix_t<short> matrix_t_int;
 typedef matrix_t<bool> matrix_t_bool;
 
 // enumera las direcciones Norte, Este, Sur y Oeste
-enum direction_t {N, E, S, W};
+enum direction_t {N, E, S, W, SE};
 
 // define vectores de desplazamiento en las 4 direcciones
-//                    N   E  S   W
-const short i_d[] = { -1, 0, 1,  0};
-const short j_d[] = {  0, 1, 0, -1};
+//                    N   E  S   W  SE
+const short i_d[] = { -1, 0, 1,  0, 1};
+const short j_d[] = {  0, 1, 0, -1, 1};
 
 using namespace std;
 

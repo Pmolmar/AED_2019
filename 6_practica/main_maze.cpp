@@ -1,6 +1,9 @@
 #include <iostream>
 #include "maze_t.hpp"
 
+//modificacion:
+//desarrollar la direccion siguiente SE
+
 using namespace std;
 
 int main()
